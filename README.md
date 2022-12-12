@@ -10,3 +10,7 @@ Buildmanagement -- pybuilder
 ### Domains
 
 ![Domains](UML/domains.drawio.svg)
+
+###
+
+![Components](UML/component.drawio.svg)
