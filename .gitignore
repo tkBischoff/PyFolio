@@ -1,3 +1,5 @@
 start_support.sh
 pyfolio_venv/
 .vim/
+*.pyc
+*.pyo
