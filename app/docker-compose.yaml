@@ -1,4 +1,15 @@
 services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=pyfolio_db
+      - POSTGRES_USER=pyfolio
+      - POSTGRES_PASSWORD=87654321
+    ports:
+      - "8001:5432"
+
   web:
     build: ./web
     command: python manage.py runserver 0.0.0.0:8000
@@ -8,3 +19,8 @@ services:
       - 8000:8000
     env_file:
       - ./.env.dev
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
