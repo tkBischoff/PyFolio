@@ -18,8 +18,7 @@ pipeline {
         }
         stage('Start container'){
             steps{
-                sh 'cd app'
-                sh 'docker-compose up'
+                sh 'docker-compose -f app/docker-compose.yaml up'
                 sh 'docker-compose ps'
             }
         }
