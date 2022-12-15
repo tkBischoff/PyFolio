@@ -25,7 +25,7 @@ pipeline {
     }
     post {
         always{
-            sh 'docker-compose down --remove-orphans -v'
+            sh 'docker-compose -f app/docker-compose.yaml down --remove-orphans -v'
             sh 'docker-compose ps'
         }
     }
