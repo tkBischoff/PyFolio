@@ -3,6 +3,7 @@ pipeline {
 
     stages {
         stage("verify tooling") {
+            def scannerHome = tool 'sonar_scanner';
             steps {
                 sh 'echo "################# verify tooling ###########################"'
                 sh '''
@@ -10,16 +11,15 @@ pipeline {
                     docker info
                     docker-compose version
                 '''
-                def scannerHome = tool 'sonar_scanner';
                 withSonarQubeEnv(installationName: 'sq1') {
                   sh "${scannerHome}/bin/sonar-scanner --version"
                 }
             }
         }
         stage('SonarQube Analysis') {
+            def scannerHome = tool 'sonar_scanner';
             steps {
                 sh 'echo "################# SonarQube Analysis ###########################"'
-                def scannerHome = tool 'sonar_scanner';
                 withSonarQubeEnv(installationName: 'sq1') {
                   sh "${scannerHome}/bin/sonar-scanner"
                 }
