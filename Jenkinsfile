@@ -21,14 +21,14 @@ pipeline {
             }
         }
         stage('Prune Docker Data'){
-                sh 'echo "################# Prune Docker Data ###########################'
             steps{
+                sh 'echo "################# Prune Docker Data ###########################'
                 sh 'docker system prune -a --volumes'
             }
         }
         stage('Start container'){
-                sh 'echo "################# Start Container ###########################'
             steps{
+                sh 'echo "################# Start Container ###########################'
                 sh 'docker-compose -f app/docker-compose.yaml up -d --wait'
                 sh 'docker-compose -f app/docker-compose.yaml ps'
             }
