@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("verify tooling") {
+            steps {
+                withSonarQubeEnv(installationName: 'sq1') {
+                  sh "${scannerHome}/bin/sonar-scanner --version"
+                }
+            }
+        }
+    }
+}
