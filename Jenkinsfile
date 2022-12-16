@@ -1,9 +1,12 @@
+node("SonarAgent"){
+    def scannerHome = tool 'sonar_scanner'
+}
+
 pipeline {
-    agent any
+    agent SonarAgent
 
     stages {
         stage("verify tooling") {
-            def scannerHome = tool 'sonar_scanner';
             steps {
                 sh 'echo "################# verify tooling ###########################"'
                 sh '''
@@ -17,7 +20,6 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'sonar_scanner';
             steps {
                 sh 'echo "################# SonarQube Analysis ###########################"'
                 withSonarQubeEnv(installationName: 'sq1') {
