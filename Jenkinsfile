@@ -38,7 +38,7 @@ pipeline {
         stage('Start container'){
             steps{
                 sh 'echo "################# Start Container ###########################"'
-                sh 'docker-compose -f app/docker-compose.yaml up -d --wait'
+                sh 'docker-compose -f app/docker-compose-test.yaml up -d --wait'
                 sh 'docker-compose -f app/docker-compose.yaml ps'
             }
         }
@@ -46,7 +46,7 @@ pipeline {
     post {
         always{
             sh 'echo "################# cleanup ###########################"'
-            sh 'docker-compose -f app/docker-compose.yaml down --remove-orphans -v'
+            sh 'docker-compose -f app/docker-compose-test.yaml down --remove-orphans -v'
             sh 'docker-compose -f app/docker-compose.yaml ps'
         }
     }
