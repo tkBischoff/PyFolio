@@ -3,7 +3,7 @@ node("SonarAgent"){
 }
 
 pipeline {
-    agent SonarAgent
+    agent any
 
     stages {
         stage("verify tooling") {
