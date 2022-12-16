@@ -3,3 +3,4 @@ pyfolio_venv/
 .vim/
 *.pyc
 *.pyo
+.scannerwork/
