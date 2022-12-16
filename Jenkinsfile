@@ -14,16 +14,22 @@ pipeline {
                     docker info
                     docker-compose version
                 '''
+            }
+            node {
+                def scannerHome = tool 'sonar_scanner';
                 withSonarQubeEnv(installationName: 'sq1') {
-                  sh "${scannerHome}/bin/sonar-scanner --version"
+                    sh "${scannerHome}/bin/sonar-scanner --version"
                 }
             }
         }
         stage('SonarQube Analysis') {
             steps {
                 sh 'echo "################# SonarQube Analysis ###########################"'
-                withSonarQubeEnv(installationName: 'sq1') {
-                  sh "${scannerHome}/bin/sonar-scanner"
+                node {
+                    def scannerHome = tool 'sonar_scanner';
+                    withSonarQubeEnv(installationName: 'sq1') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
