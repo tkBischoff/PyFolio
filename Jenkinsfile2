@@ -7,16 +7,14 @@ node {
     }
     stage("verify tooling") {
         def scannerHome = tool 'sonar_scanner';
-        steps {
-            sh 'echo "################# verify tooling ###########################"'
-            sh '''
-                docker version
-                docker info
-                docker-compose version
-            '''
-            withSonarQubeEnv(installationName: 'sq1') {
-              sh "${scannerHome}/bin/sonar-scanner --version"
-            }
+        sh 'echo "################# verify tooling ###########################"'
+        sh '''
+            docker version
+            docker info
+            docker-compose version
+        '''
+        withSonarQubeEnv(installationName: 'sq1') {
+          sh "${scannerHome}/bin/sonar-scanner --version"
         }
     }
 }
