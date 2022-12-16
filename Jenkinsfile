@@ -1,7 +1,3 @@
-environment{
-    def scannerHome = tool 'sonar_scanner'
-}
-
 pipeline {
     agent any
 
@@ -14,16 +10,22 @@ pipeline {
                     docker info
                     docker-compose version
                 '''
-                withSonarQubeEnv(installationName: 'sq1') {
-                    sh "${scannerHome}/bin/sonar-scanner --version"
+                script{
+                    def scannerHome = tool 'sonar_scanner'
+                    withSonarQubeEnv(installationName: 'sq1') {
+                        sh "${scannerHome}/bin/sonar-scanner --version"
+                    }
                 }
             }
         }
         stage('SonarQube Analysis') {
             steps {
                 sh 'echo "################# SonarQube Analysis ###########################"'
-                withSonarQubeEnv(installationName: 'sq1') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                script{
+                    def scannerHome = tool 'sonar_scanner'
+                    withSonarQubeEnv(installationName: 'sq1') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
