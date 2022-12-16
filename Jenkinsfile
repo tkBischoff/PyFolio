@@ -9,8 +9,10 @@ pipeline {
                     docker version
                     docker info
                     docker-compose version
-                    sonar-scanner --version
                 '''
+                withSonarQubeEnv(installationName: 'sq1') {
+                  sh "${scannerHome}/bin/sonar-scanner --version"
+                }
             }
         }
         stage('SonarQube Analysis') {
