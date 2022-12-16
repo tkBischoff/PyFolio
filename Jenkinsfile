@@ -12,8 +12,10 @@ pipeline {
             }
         }
         stage('SonarQube Analysis') {
-            withSonarQubeEnv(installationName: 'sq1') {
-              sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                withSonarQubeEnv(installationName: 'sq1') {
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
         stage('Prune Docker Data'){
