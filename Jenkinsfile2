@@ -4,6 +4,7 @@ node {
     }
 
     stage("verify tooling") {
+        def scannerHome = tool 'sonar_scanner';
         steps {
             sh 'echo "################# verify tooling ###########################"'
             sh '''
