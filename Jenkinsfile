@@ -42,6 +42,13 @@ pipeline {
                 sh 'docker-compose -f app/docker-compose-test.yaml ps'
             }
         }
+        stage('Deploy'){
+            steps{
+                sh 'echo "################# Deploying ###########################"'
+                sh 'docker-compose -f app/docker-compose-deploy.yaml up -d'
+                sh 'docker-compose -f app/docker-compose-deploy.yaml ps'
+            }
+        }
     }
     post {
         always{
