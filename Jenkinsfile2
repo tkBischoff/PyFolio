@@ -5,7 +5,7 @@ pipeline {
         stage("verify tooling") {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
-                  sh "${scannerHome}/bin/sonar-scanner --version"
+                  sh "sonar-scanner --version"
                 }
             }
         }
