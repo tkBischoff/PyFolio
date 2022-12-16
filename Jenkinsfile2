@@ -1,13 +1,6 @@
 node {
-    stage('SonarQube analysis') {
-        def scannerHome = tool name: 'sonar_scanner';
-        withSonarQubeEnv('sq1') { 
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
-    }
     stage("verify tooling") {
         def scannerHome = tool 'sonar_scanner';
-        sh 'echo "################# verify tooling ###########################"'
         sh '''
             docker version
             docker info
@@ -15,6 +8,28 @@ node {
         '''
         withSonarQubeEnv(installationName: 'sq1') {
           sh "${scannerHome}/bin/sonar-scanner --version"
+        }
+    }
+
+    stage('SonarQube analysis') {
+        def scannerHome = tool name: 'sonar_scanner';
+        withSonarQubeEnv('sq1') { 
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+    }
+
+    stage('Prune Docker Data'){
+        steps{
+            sh 'echo "################# Prune Docker Data ###########################"'
+            sh 'docker system prune -a --volumes'
+        }
+    }
+
+    stage('Start container'){
+        steps{
+            sh 'echo "################# Start Container ###########################"'
+            sh 'docker-compose -f app/docker-compose.yaml up -d --wait'
+            sh 'docker-compose -f app/docker-compose.yaml ps'
         }
     }
 }
