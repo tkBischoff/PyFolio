@@ -2,13 +2,16 @@ services:
   db:
     image: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/pyfolio-deploy/
     environment:
       - POSTGRES_DB=pyfolio_db
       - POSTGRES_USER=pyfolio
       - POSTGRES_PASSWORD=87654321
     ports:
-      - "8001:5432"
+      - "8000:5432"
+    networks:
+      - pyfolio-deploy-net
+
 
   web:
     build: ./web
@@ -16,11 +19,19 @@ services:
     volumes:
       - ./web/:/usr/src/app/
     ports:
-      - 8000:8000
+      - 8020:8000
+    environment:
+      - SQL_HOST=db
     env_file:
       - ./.env.dev
     depends_on:
       - db
+    networks:
+      - pyfolio-deploy-net
 
 volumes:
   postgres_data:
+
+networks:
+  pyfolio-deploy-net:
+    name: pyfolio-deploy-net
