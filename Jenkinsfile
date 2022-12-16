@@ -9,6 +9,7 @@ pipeline {
                     docker version
                     docker info
                     docker-compose version
+                    sonar-scanner --version
                 '''
             }
         }
