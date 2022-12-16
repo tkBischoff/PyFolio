@@ -1,14 +1,9 @@
-node("SonarAgent"){
+environment{
     def scannerHome = tool 'sonar_scanner'
 }
 
 pipeline {
-    agent {
-        node {
-            label 'sonar-agent'
-            def scannerHome = tool 'sonar_scanner';
-        }
-    }
+    agent any
 
     stages {
         stage("verify tooling") {
