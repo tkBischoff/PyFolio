@@ -29,32 +29,24 @@ pipeline {
                 }
             }
         }
+        stage('Shutdown old Container'){
+            steps{
+                sh 'docker-compose -f app/docker-compose.yaml down --remove-orphans -v'
+                sh 'docker-compose -f app/docker-compose.yaml ps'
+            }
+        }
         stage('Prune Docker Data'){
             steps{
                 sh 'echo "################# Prune Docker Data ###########################"'
                 sh 'docker system prune -a --volumes'
             }
         }
-        stage('Start container'){
-            steps{
-                sh 'echo "################# Start Container ###########################"'
-                sh 'docker-compose -f app/docker-compose-test.yaml up -d --wait'
-                sh 'docker-compose -f app/docker-compose-test.yaml ps'
-            }
-        }
         stage('Deploy'){
             steps{
                 sh 'echo "################# Deploying ###########################"'
-                sh 'docker-compose -f app/docker-compose-deploy.yaml up -d'
-                sh 'docker-compose -f app/docker-compose-deploy.yaml ps'
+                sh 'docker-compose -f app/docker-compose.yaml up -d'
+                sh 'docker-compose -f app/docker-compose.yaml ps'
             }
-        }
-    }
-    post {
-        always{
-            sh 'echo "################# cleanup ###########################"'
-            sh 'docker-compose -f app/docker-compose-test.yaml down --remove-orphans -v'
-            sh 'docker-compose -f app/docker-compose-test.yaml ps'
         }
     }
 }

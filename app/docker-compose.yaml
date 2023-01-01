@@ -9,8 +9,6 @@ services:
       - POSTGRES_PASSWORD=87654321
     ports:
       - "8000:5432"
-    networks:
-      - pyfolio-deploy-net
 
 
   web:
@@ -26,12 +24,6 @@ services:
       - ./.env.dev
     depends_on:
       - db
-    networks:
-      - pyfolio-deploy-net
 
 volumes:
   postgres_data:
-
-networks:
-  pyfolio-deploy-net:
-    name: pyfolio-deploy-net
