@@ -14,3 +14,7 @@ Buildmanagement -- pybuilder
 ### Components
 
 ![Components](UML/component.drawio.svg)
+
+### ER Diagram for investments
+
+![ER](UML/ER.drawio.svg)
