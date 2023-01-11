@@ -7,6 +7,7 @@ from datetime import date, datetime, timedelta
 from update_manager.models import Security, SecurityPrice 
 from update_manager.update_equitys.isin_handler import IsinHandler 
 
+
 class EquityUpdater:
     def __init__(self, equityIsins: str, finnhubApiKey: str, logger):
         """
@@ -140,6 +141,8 @@ class EquityUpdater:
         for every security up to the current date, starting
         at self.beginDate.
         """
+        self.logger.info("Started updating equities")
+
         for _, row in self.equityIsins:
             isin = row['ISIN']
             
