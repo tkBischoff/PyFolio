@@ -7,7 +7,6 @@ from datetime import date, datetime, timedelta
 from update_manager.models import Security, SecurityPrice 
 from update_manager.update_equitys.isin_handler import IsinHandler 
 
-
 class EquityUpdater:
     def __init__(self, equityIsins: str, finnhubApiKey: str, logger):
         """

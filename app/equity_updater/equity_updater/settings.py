@@ -28,9 +28,33 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Logging config
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+        'format': '[DJANGO] %(levelname)s %(asctime)s %(module)s '
+              '%(name)s.%(funcName)s:%(lineno)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+        'level': 'DEBUG',
+        'class': 'logging.StreamHandler',
+        'formatter': 'default',
+        }
+    },
+    'loggers': {
+        '': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        'propagate': False,
+        }
+    },
+}
 
 # Application definition
-
 INSTALLED_APPS = [
     'update_manager.apps.UpdateManagerConfig',
     'django.contrib.admin',
@@ -39,7 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_q',
+    'update_equitys.apps.UpdateManagerConfig',
 ]
 
 MIDDLEWARE = [

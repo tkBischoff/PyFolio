@@ -4,3 +4,4 @@ SQLAlchemy==1.4.35
 investpy==1.0.8
 pandas==1.5.2
 django-q
+redis
