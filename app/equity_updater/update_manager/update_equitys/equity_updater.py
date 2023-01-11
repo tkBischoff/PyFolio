@@ -15,7 +15,7 @@ class EquityUpdater:
         :param finnhubApiKey : API Key for finnhub.com
         :param logger        : logger instance
         """
-        self.finnhub_client = finnhub.Client(api_key=api_key)
+        self.finnhub_client = finnhub.Client(api_key=finnhubApiKey)
         self.isinHandler = IsinHandler(finnhubApiKey)
 
         # use only US equitys as the free version of the
