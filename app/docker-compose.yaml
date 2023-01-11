@@ -10,6 +10,19 @@ services:
     ports:
       - "8000:5432"
 
+  equity_updater:
+    build: ./equity_updater
+    command: python manage.py runserver 0.0.0.0:8050
+    volumes:
+      - ./equity_updater/:/usr/src/app/
+    ports:
+      - 8050:8050
+    environment:
+      - SQL_HOST=db
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
 
   web:
     build: ./web
