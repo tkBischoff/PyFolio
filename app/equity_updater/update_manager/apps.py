@@ -16,8 +16,8 @@ class UpdateManagerConfig(AppConfig):
         from update_manager.update_equitys.equity_updater import EquityUpdater
 
         # update DB once on startup
-        updater = EquityUpdater(isinFile, finnhub_key, logger)
-        updater.updateStocks()
+        eq_updater = EquityUpdater(isinFile, finnhub_key, logger)
+        eq_updater.updateStocks()
 
         # start scheduler
-        #updater.start()
+        updater.start()
