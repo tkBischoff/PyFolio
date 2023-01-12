@@ -1,8 +1,8 @@
 from django.db import models
 
 class Security(models.Model):
+    ticker = models.CharField(max_length=12, unique=True)
     currency = models.CharField(max_length=3)
-    ticker = models.CharField(max_length=12)
     name = models.CharField(max_length=200)
 
 class SecurityPrice(models.Model):

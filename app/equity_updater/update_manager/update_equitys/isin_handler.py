@@ -22,7 +22,7 @@ class IsinHandler:
         info = self.finnhub_client.symbol_lookup(isin)
 
         if info['count'] < 1:
-            raise RuntimeError
+            raise RuntimeError("No information for ISIN {}".format(isin))
 
         return pd.DataFrame(info['result'])
 
