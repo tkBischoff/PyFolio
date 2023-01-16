@@ -15,3 +15,5 @@ __pycache__/
 
 packages/django_security_db/dist
 packages/django_security_db/security_db.egg-info
+*.bkp
+*.dtmp
