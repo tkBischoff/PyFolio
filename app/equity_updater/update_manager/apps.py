@@ -1,4 +1,5 @@
 import os
+import time
 import logging
 from django.apps import AppConfig
 
@@ -11,7 +12,7 @@ class UpdateManagerConfig(AppConfig):
     name = 'update_manager'
 
     def ready(self):
-        # TODO: use scheduler
+        time.sleep(10) # to allow db migrations to run
         from .update_equitys import updater
         from update_manager.update_equitys.equity_updater import EquityUpdater
 

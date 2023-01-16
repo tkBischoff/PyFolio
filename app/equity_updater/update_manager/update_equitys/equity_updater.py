@@ -1,11 +1,11 @@
 import finnhub
 import time
-
 import pandas as pd
+
+from security_db.models import Security, SecurityPrice
 from datetime import date, datetime, timedelta
 from django.core.exceptions import ObjectDoesNotExist
 
-from update_manager.models import Security, SecurityPrice
 from update_manager.update_equitys.isin_handler import IsinHandler 
 
 
