@@ -4,3 +4,14 @@ pyfolio_venv/
 *.pyc
 *.pyo
 .scannerwork/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+packages/django_security_db/dist
+packages/django_security_db/security_db.egg-info
