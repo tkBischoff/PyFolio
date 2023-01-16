@@ -1,7 +1,9 @@
-Django==3.2.6
+--extra-index-url https://api.packagr.app/ymligh7J
+Django==4.1.3
 psycopg2-binary==2.9.1
 SQLAlchemy==1.4.35
 investpy==1.0.8
 pandas==1.5.2
 apscheduler
 finnhub-python==2.4.15
+security-db==0.1
