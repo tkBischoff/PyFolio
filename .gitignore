@@ -18,3 +18,4 @@ packages/django_security_db/security_db.egg-info
 *.bkp
 *.dtmp
 packages/django_security_db/build
+app/equity_updater/update_manager/migrations
