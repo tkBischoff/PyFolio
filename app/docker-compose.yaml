@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:5432"
 
-  equity_updater:
+  SecurityUpdater:
     build: ./equity_updater
     command: python manage.py runserver 0.0.0.0:8050
     volumes:
@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
 
-  web:
+  Frontend:
     build: ./web
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
