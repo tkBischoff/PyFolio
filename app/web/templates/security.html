@@ -2,6 +2,10 @@
 
 {% block title %}{{ security.ticker }}{% endblock %}
 
+{% block imports %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+{% endblock %}
+
 {% block nav %}
   <li><a href="{% url 'home' %}">Home</a></li>
   <li><a href="{% url 'browse' %}">Browse</a></li>
@@ -10,5 +14,14 @@
 {% block content %}
 
 <h2>{{ security.name }}</h2>
+
+<div id="chart">
+</div>
+
+<script>
+  var chart = new ApexCharts(document.querySelector("#chart"), {{ candle_options|safe }} );
+
+  chart.render();
+</script>
 
 {% endblock %}

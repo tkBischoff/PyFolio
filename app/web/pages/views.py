@@ -1,3 +1,7 @@
+import time
+from datetime import datetime
+import json
+
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import Http404
@@ -21,9 +25,41 @@ def browse(request):
 def security(request, ticker):
     try:
         security = Security.get_by_ticker(ticker) 
+        prices = security.prices()
     except:
         # TODO: correct exception
         raise Http404("Security does not exist")
 
-    return render(request, 'security.html', {'security': security})
+    # build candleplot data
+    data = []
+    for price in prices:
+        #timestamp = int(time.mktime(price.date.timetuple()))
+        timestamp = str(datetime(price.date.year, price.date.month, price.date.day))
+        candle = [price.open, price.low, price.high, price.close]
+        data.append({"x": timestamp, "y": candle})
 
+    candle_options = {
+            "series": [{
+                "data": data
+            }],
+            "chart": {
+                "type": "candlestick",
+                "id": "candles",
+                "toolbar": {
+                    "autoSelected": "pan",
+                    "show": "false"
+                }
+            },
+            "title": {
+                "text": security.name,
+                "align": "left"
+            },
+            "xaxis": {
+                "type": "datetime"
+            }
+    }
+
+    return render(request, 
+                  'security.html', {'security': security,
+                                    'candle_options': json.dumps(candle_options)}
+                  )
