@@ -2,8 +2,46 @@
 
 {% block title %}browse{% endblock %}
 
+{% block nav %}
+  <li><a href="{% url 'home' %}">Home</a></li>
+{% endblock %}
+
 {% block content %}
 
-<h2>Browse</h2>
+<h2>Browse Securities</h2>
 
+<!-- Display all securities is page -->
+<table>
+  <tr>
+    <th>Ticker</th>
+    <th>Name</th>
+    <th>Currency</th>
+  </tr>
+  {% for securty in page_obj %}
+    <tr>
+    <th>{{ securty.ticker }}</th>
+    <th>{{ securty.name }}</th>
+    <th>{{ securty.currency }}</th>
+    </tr>
+  {% endfor %}
+</table>
+
+<!-- page navigation -->
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
 {% endblock %}
