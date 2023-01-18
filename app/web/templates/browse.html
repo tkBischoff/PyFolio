@@ -17,11 +17,11 @@
     <th>Name</th>
     <th>Currency</th>
   </tr>
-  {% for securty in page_obj %}
+  {% for securtity in page_obj %}
     <tr>
-    <th>{{ securty.ticker }}</th>
-    <th>{{ securty.name }}</th>
-    <th>{{ securty.currency }}</th>
+      <th><a href="{% url 'security' securtity.ticker %}">{{ securtity.ticker }}</a></th>
+      <th>{{ securtity.name }}</th>
+      <th>{{ securtity.currency }}</th>
     </tr>
   {% endfor %}
 </table>

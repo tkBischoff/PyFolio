@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ security.ticker }}{% endblock %}
+
+{% block nav %}
+  <li><a href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'browse' %}">Browse</a></li>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ security.name }}</h2>
+
+{% endblock %}

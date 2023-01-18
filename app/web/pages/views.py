@@ -17,3 +17,13 @@ def browse(request):
     
     return render(request, 'browse.html', {'page_obj': page_obj})
     #return render(request, 'browse.html')
+
+def security(request, ticker):
+    try:
+        security = Security.get_by_ticker(ticker) 
+    except:
+        # TODO: correct exception
+        raise Http404("Security does not exist")
+
+    return render(request, 'security.html', {'security': security})
+
