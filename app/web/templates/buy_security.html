@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block nav %}
+  <li><a href="{% url 'browse' %}">Browse</a></li>
+  <li><a href="{% url 'home' %}">Home</a></li>
+{% endblock %}
+
+
+{% block content %}
+  <h1>{{ ticker }}</h1>
+
+  <form action="{% url 'buy_security' ticker %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Buy</button>
+  </form>
+{% endblock %}
