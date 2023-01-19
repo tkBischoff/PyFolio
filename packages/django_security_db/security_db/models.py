@@ -4,16 +4,6 @@ from django.contrib.auth.models import User
 
 from typing import List
 
-
-class PyfolioUser(User):
-    class Meta:
-        proxy = True
-
-    @property
-    def investments(self):
-        return Investment.objects.filter(user=self)
-
-
 class Security(models.Model):
     ticker = models.CharField(max_length=12, unique=True)
     currency = models.CharField(max_length=3)
@@ -48,6 +38,25 @@ class Investment(models.Model):
     amount = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     security = models.OneToOneField(Security, on_delete=models.CASCADE)
+
+
+class PyfolioUser(User):
+    class Meta:
+        proxy = True
+
+    @property
+    def investments(self):
+        return Investment.objects.filter(user=self)
+
+    def invest(self, security: Security, amount: float) -> Investment:
+        """
+        Creates a new Investment entry into the database for
+        the user.
+        """
+        investment = Investment(amount=amount, security=security,user=self).save()
+        return investment
+
+
 
   
 class SecurityPrice(models.Model):
