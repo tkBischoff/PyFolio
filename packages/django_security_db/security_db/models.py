@@ -44,10 +44,6 @@ class PyfolioUser(User):
     class Meta:
         proxy = True
 
-    @property
-    def investments(self):
-        return Investment.objects.filter(user=self)
-
     def invest(self, security: Security, amount: float) -> Investment:
         """
         Creates a new Investment entry into the database for
@@ -56,6 +52,9 @@ class PyfolioUser(User):
         investment = Investment(amount=amount, security=security,user=self).save()
         return investment
 
+    @property
+    def investments(self):
+        return Investment.objects.filter(user=self)
 
 
   

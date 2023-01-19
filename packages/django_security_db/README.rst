@@ -9,9 +9,8 @@ way.
 
 usage:
 1. Add "security_db" to your INSTALLED_APPS like this:
-    INSTALLED_APPS = [
-        ...,
-        'security_db',
-    ]
-
+INSTALLED_APPS = [
+    ...,
+    'security_db',
+]
 2. Run 'python manage.py sqlmigrate' to create the models
