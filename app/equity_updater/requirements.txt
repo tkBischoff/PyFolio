@@ -6,4 +6,4 @@ investpy==1.0.8
 pandas==1.5.2
 apscheduler
 finnhub-python==2.4.15
-security-db==0.1
+security-db
