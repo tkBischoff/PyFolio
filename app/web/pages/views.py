@@ -5,12 +5,39 @@ import json
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.http import Http404
-from security_db.models import Security
+from django.contrib.auth.decorators import login_required
+from security_db.models import Security, PyfolioUser
 
 # Create your views here.
 
+@login_required
 def home(request):
-    return render(request, 'home.html')
+    user = PyfolioUser.objects.get(id=request.user.id)
+
+    tickers = [investment.security.ticker for investment in user.investments]
+    amounts = [investment.amount for investment in user.investments]
+
+    options = {
+        'series': amounts,
+        'labels': tickers,
+        'chart': {
+            'type': 'donut',
+        },
+        'responsive': [{
+            'breakpoint': 480,
+            'options': {
+                'chart': {
+                    'width': 200
+                },
+                'legend': {
+                    'position': 'bottom'
+                }
+            }
+        }]
+    };
+
+    return render(request, 'home.html', {'pie_options': json.dumps(options)})
+
 
 def browse(request):
     #all_securities = Security.objects.order_by(ticker).all()
@@ -20,7 +47,8 @@ def browse(request):
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'browse.html', {'page_obj': page_obj})
-    #return render(request, 'browse.html')
+
+
 
 def security(request, ticker):
     try:
